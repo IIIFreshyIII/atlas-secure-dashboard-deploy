@@ -7,13 +7,13 @@ Full-stack semester project using React, FastAPI, PostgreSQL, JWT login, and Doc
 Frontend:
 
 ```txt
-Add Vercel URL after deployment.
+https://atlas-secure-dashboard.vercel.app
 ```
 
 Backend:
 
 ```txt
-Add Render URL after deployment.
+https://atlas-secure-dashboard-api.onrender.com
 ```
 
 ## Demo Login
@@ -73,7 +73,7 @@ DATABASE_URL=your_neon_connection_string
 JWT_SECRET=your_long_random_secret
 DEMO_EMAIL=demo@student.local
 DEMO_PASSWORD=Password123!
-FRONTEND_ORIGIN=https://your-vercel-url.vercel.app
+FRONTEND_ORIGIN=https://atlas-secure-dashboard.vercel.app
 ```
 
 Frontend:
@@ -86,12 +86,11 @@ Frontend:
 Frontend environment variable:
 
 ```env
-VITE_API_URL=https://your-render-url.onrender.com
+VITE_API_URL=https://atlas-secure-dashboard-api.onrender.com
 ```
 
 ## Submission Checklist
 
-- Replace the public URL placeholders above.
 - Confirm the demo account can log in.
 - Confirm the dashboard shows `GET /api/atlas/status verified`.
 - Confirm unauthenticated `GET /api/atlas/status` returns `401 Unauthorized`.
