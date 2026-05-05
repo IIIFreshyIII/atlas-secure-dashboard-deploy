@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import { fetchAtlasStatus, fetchHealth, login, sendAtlasChat } from "./api.js";
 
 const wait = (milliseconds) => new Promise((resolve) => window.setTimeout(resolve, milliseconds));
@@ -221,6 +221,26 @@ function App() {
   const isHandoff = authTransition === "handoff";
   const showChatStage = isLoggedIn || isHandoff;
   const showPasswordField = email.trim().length > 0;
+  const lastAtlasMessageIndex = chatMessages.reduce(
+    (latestIndex, message, index) => (message.role === "atlas" ? index : latestIndex),
+    -1
+  );
+
+  const suggestions = (
+    <div className="suggestions" aria-label="Suggested prompts">
+      <span>Suggested</span>
+      {SUGGESTED_PROMPTS.map((prompt) => (
+        <button
+          type="button"
+          disabled={chatLoading}
+          key={prompt}
+          onClick={() => sendChatMessage(prompt)}
+        >
+          {prompt}
+        </button>
+      ))}
+    </div>
+  );
 
   useEffect(() => {
     fetchHealth()
@@ -614,19 +634,23 @@ function App() {
                 <div className="chat-window">
                   <div className="chat-thread" ref={chatThreadRef}>
                     {chatMessages.map((message, index) => (
-                      <div
-                        className={`chat-message ${
-                          message.role === "user" ? "user-message" : "atlas-message"
-                        }`}
-                        key={`${message.role}-${index}`}
-                      >
-                        <span className="message-author">
-                          {message.role === "atlas" && <MiniAtlasMark />}
-                          <span className="message-author-name">{message.role === "user" ? "You" : "Atlas"}</span>
-                        </span>
-                        <p>{message.text}</p>
-                      </div>
+                      <Fragment key={`${message.role}-${index}`}>
+                        <div
+                          className={`chat-message ${
+                            message.role === "user" ? "user-message" : "atlas-message"
+                          }`}
+                        >
+                          <span className="message-author">
+                            {message.role === "atlas" && <MiniAtlasMark />}
+                            <span className="message-author-name">{message.role === "user" ? "You" : "Atlas"}</span>
+                          </span>
+                          <p>{message.text}</p>
+                        </div>
+                        {!chatLoading && index === lastAtlasMessageIndex && suggestions}
+                      </Fragment>
                     ))}
+
+                    {!chatLoading && lastAtlasMessageIndex === -1 && suggestions}
 
                     {chatLoading && (
                       <div className="chat-message atlas-message">
@@ -639,6 +663,12 @@ function App() {
                     )}
                   </div>
                 </div>
+
+                {atlasStatus && (
+                  <div className="protected-proof">
+                    GET /api/atlas/status verified
+                  </div>
+                )}
 
                 <form className="chat-composer" ref={chatComposerRef} onSubmit={handleChatSubmit}>
                   <input
@@ -653,26 +683,6 @@ function App() {
                     Send
                   </button>
                 </form>
-
-                {atlasStatus && (
-                  <div className="protected-proof">
-                    GET /api/atlas/status verified
-                  </div>
-                )}
-
-                <div className="suggestions" aria-label="Suggested prompts">
-                  <span>Suggested</span>
-                  {SUGGESTED_PROMPTS.map((prompt) => (
-                    <button
-                      type="button"
-                      disabled={chatLoading}
-                      key={prompt}
-                      onClick={() => sendChatMessage(prompt)}
-                    >
-                      {prompt}
-                    </button>
-                  ))}
-                </div>
 
                 <button className="logout-button" type="button" onClick={handleLogout}>
                   Logout
