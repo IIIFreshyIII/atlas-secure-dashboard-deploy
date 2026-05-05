@@ -185,6 +185,11 @@ function MiniAtlasMark({ active = false }) {
   );
 }
 
+const SUGGESTED_PROMPTS = [
+  "Show me the protected route status",
+  "Summarize what this demo proves",
+];
+
 function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -503,10 +508,8 @@ function App() {
     setChatLoading(false);
   }
 
-  async function handleChatSubmit(event) {
-    event.preventDefault();
-
-    const message = chatInput.trim();
+  async function sendChatMessage(rawMessage) {
+    const message = rawMessage.trim();
     if (!message || !token || chatLoading) {
       return;
     }
@@ -524,6 +527,11 @@ function App() {
     } finally {
       setChatLoading(false);
     }
+  }
+
+  async function handleChatSubmit(event) {
+    event.preventDefault();
+    await sendChatMessage(chatInput);
   }
 
   return (
@@ -654,12 +662,16 @@ function App() {
 
                 <div className="suggestions" aria-label="Suggested prompts">
                   <span>Suggested</span>
-                  <button type="button" onClick={() => setChatInput("Show me the protected route status")}>
-                    Show protected route status
-                  </button>
-                  <button type="button" onClick={() => setChatInput("Summarize what this demo proves")}>
-                    Summarize this demo
-                  </button>
+                  {SUGGESTED_PROMPTS.map((prompt) => (
+                    <button
+                      type="button"
+                      disabled={chatLoading}
+                      key={prompt}
+                      onClick={() => sendChatMessage(prompt)}
+                    >
+                      {prompt}
+                    </button>
+                  ))}
                 </div>
 
                 <button className="logout-button" type="button" onClick={handleLogout}>
