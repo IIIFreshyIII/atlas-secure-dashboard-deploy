@@ -490,7 +490,11 @@ input:focus {
   z-index: 3;
 }
 
-.chat-pills span {
+.chat-pills span,
+.chat-pills a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
   border: 1px solid rgba(255, 255, 255, 0.11);
   border-radius: 999px;
   padding: 0.42rem 0.68rem;
@@ -498,6 +502,18 @@ input:focus {
   background: rgba(255, 255, 255, 0.055);
   font-size: 0.82rem;
   font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.chat-pills a {
+  cursor: pointer;
+}
+
+.chat-pills a:hover {
+  color: #061016;
+  background: #7df4ff;
+  border-color: rgba(125, 244, 255, 0.7);
 }
 
 .chat-window {
@@ -1039,7 +1055,8 @@ input:focus {
     left: 0.9rem;
   }
 
-  .chat-pills span {
+  .chat-pills span,
+  .chat-pills a {
     padding: 0.34rem 0.52rem;
     font-size: 0.74rem;
   }

@@ -190,6 +190,9 @@ const SUGGESTED_PROMPTS = [
   "Summarize what this demo proves",
 ];
 
+const DATABASE_DASHBOARD_URL =
+  "https://console.neon.tech/app/projects/spring-rain-35913161/branches/br-tiny-term-ajaoapcn/tables?database=atlas_demo";
+
 function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -625,7 +628,14 @@ function App() {
               <div className="chat-stage">
                 <div className="chat-pills" aria-label="System status">
                   <span>API: {health?.status || "checking"}</span>
-                  <span>DB: {health?.database || "checking"}</span>
+                  <a
+                    href={DATABASE_DASHBOARD_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    title="Open Neon database dashboard"
+                  >
+                    DB: {health?.database || "checking"}
+                  </a>
                   <span>Route: {atlasStatus?.protected_route || "loading"}</span>
                 </div>
 
