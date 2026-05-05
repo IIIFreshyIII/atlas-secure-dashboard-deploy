@@ -30,6 +30,7 @@ def atlas_status(
 def atlas_chat(
     payload: AtlasChatRequest,
     current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
 ) -> AtlasChatResponse:
     user_message = payload.message.strip()
     normalized_message = user_message.lower()
@@ -44,6 +45,11 @@ def atlas_chat(
         reply = "Atlas is online. Ask me to check the protected route or summarize what this demo proves."
     else:
         reply = "Received. This school-safe demo chat is authenticated and ready."
+
+    if user_message:
+        db.add(AtlasMessage(message=f"User ({current_user.email}): {user_message}"[:500]))
+        db.add(AtlasMessage(message=f"Atlas: {reply}"[:500]))
+        db.commit()
 
     return AtlasChatResponse(
         reply=reply,
