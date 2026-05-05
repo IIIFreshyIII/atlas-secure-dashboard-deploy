@@ -599,7 +599,6 @@ function App() {
                   <span>API: {health?.status || "checking"}</span>
                   <span>DB: {health?.database || "checking"}</span>
                   <span>Route: {atlasStatus?.protected_route || "loading"}</span>
-                  <span>ATLAS: {atlasStatus ? "online" : "loading"}</span>
                 </div>
 
                 {error && <div className="error-box">{error}</div>}
