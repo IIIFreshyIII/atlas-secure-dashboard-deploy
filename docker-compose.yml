@@ -26,7 +26,7 @@ services:
       DATABASE_URL: ${DATABASE_URL:-postgresql+psycopg2://postgres:postgres@db:5432/atlas_demo}
       JWT_SECRET: ${JWT_SECRET:-change-this-local-dev-secret-please-update}
       DEMO_EMAIL: ${DEMO_EMAIL:-demo@student.local}
-      DEMO_PASSWORD: ${DEMO_PASSWORD:-Password123!}
+      DEMO_PASSWORD: ${DEMO_PASSWORD:-AtlasSecureDemo-2026-74!}
       FRONTEND_ORIGIN: ${FRONTEND_ORIGIN:-http://localhost:5173}
       PORT: ${BACKEND_PORT:-8000}
     ports:

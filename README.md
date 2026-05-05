@@ -20,7 +20,7 @@ https://atlas-secure-dashboard-api.onrender.com
 
 ```txt
 Email: demo@student.local
-Password: Password123!
+Password: AtlasSecureDemo-2026-74!
 ```
 
 ## Run Locally
@@ -72,7 +72,7 @@ Backend environment variables:
 DATABASE_URL=your_neon_connection_string
 JWT_SECRET=your_long_random_secret
 DEMO_EMAIL=demo@student.local
-DEMO_PASSWORD=Password123!
+DEMO_PASSWORD=AtlasSecureDemo-2026-74!
 FRONTEND_ORIGIN=https://atlas-secure-dashboard.vercel.app
 ```
 

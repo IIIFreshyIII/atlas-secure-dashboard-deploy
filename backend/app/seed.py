@@ -11,7 +11,7 @@ DEFAULT_MESSAGE = "Successful authenticated GET request from Atlas backend."
 
 def seed_database(db: Session) -> None:
     demo_email = os.getenv("DEMO_EMAIL", "demo@student.local")
-    demo_password = os.getenv("DEMO_PASSWORD", "Password123!")
+    demo_password = os.getenv("DEMO_PASSWORD", "AtlasSecureDemo-2026-74!")
 
     existing_user = db.query(User).filter(User.email == demo_email).first()
     if existing_user is None:

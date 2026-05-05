@@ -13,7 +13,7 @@ Demo login:
 
 ```txt
 Email: demo@student.local
-Password: Password123!
+Password: AtlasSecureDemo-2026-74!
 ```
 
 ## Short Summary To Memorize
