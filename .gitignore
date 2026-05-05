@@ -1,0 +1,29 @@
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# Node
+node_modules/
+dist/
+.vite/
+
+# OS/editor
+.DS_Store
+.vscode/
+.idea/
+
+# Local project helper notes
+AGENTS.md
+ATLAS_CONTEXT.md
+COLOUR_PALETTE.md
+
+# Docker/database
+postgres_data/

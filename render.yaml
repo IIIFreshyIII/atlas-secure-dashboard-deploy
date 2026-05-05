@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: atlas-secure-dashboard-api
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: DEMO_EMAIL
+        value: demo@student.local
+      - key: DEMO_PASSWORD
+        sync: false
+      - key: FRONTEND_ORIGIN
+        sync: false

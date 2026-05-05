@@ -1,17 +1,98 @@
-# Term Project CMPS-394 (sp26)
+# Atlas Secure Dashboard
 
-You are going to be taking most of what we learned in this class and applying it to a single project. You will need to take a frontend framework of your choice (e.g., React, Vue, Angular) and a backend framework of your choice (e.g., Express, Flask, Django) and create a full-stack application that incorporates the following features:
-- A frontend that allows users to interact with the application
-    - Users should have to log in to access the application (just one predefined account is fine)
-- A backend API that handles user authentication and data storage
-    - Once authenticated and logged into the application, users should be able to perform a GET request to retrieve some data from the backend and display it on the frontend. This endpoint should not be accessible without logging in first, and should return a 401 Unauthorized error if accessed without proper authentication
-- Use a database to store user information and any other relevant data for your application
-- Use Docker to containerize your application and its dependencies (at least locally)
-- Your application must be hosted using any service you like and accessible via a public URL
-    - There are free options available for hosting frontend, backend, and databases so you should not have to spend anything
-    - Depending on your environment, you may not need docker for hosting, but you should still use it for a local setup
-    - Environment variables should be used to manage sensitive information like database credentials and API keys, and these should not be hardcoded in your codebase
+Full-stack semester project using React, FastAPI, PostgreSQL, JWT login, and Docker Compose.
 
-You will need to explore a few areas we have touched on in this class in more detail to complete this project, so be prepared to do some research and learning on your own. This is a common scenario in real-world development, where you often have to learn new technologies and concepts on the fly to complete a project. The labs and assignments have been designed to get you used to this on a smaller scale.
+## Public URLs
 
-This will be due before the start of class, 4:59 PM on May 5th. Dr. Russell should be able to visit your public URL, log in, and see a message on the UI indicating a successful GET request.
+Frontend:
+
+```txt
+Add Vercel URL after deployment.
+```
+
+Backend:
+
+```txt
+Add Render URL after deployment.
+```
+
+## Demo Login
+
+```txt
+Email: demo@student.local
+Password: Password123!
+```
+
+## Run Locally
+
+```bash
+cp .env.example .env
+docker compose up --build
+```
+
+Open the frontend:
+
+```txt
+http://localhost:5173
+```
+
+Backend health check:
+
+```txt
+http://localhost:8000/api/health
+```
+
+## Required API Routes
+
+```txt
+POST /api/auth/login
+GET  /api/atlas/status
+POST /api/atlas/chat
+```
+
+`GET /api/atlas/status` is protected. It returns `401 Unauthorized` without a valid JWT and returns a verified Atlas status after login.
+
+## Deployment
+
+Database:
+
+- Create a Neon PostgreSQL database.
+- Copy the Neon connection string into Render as `DATABASE_URL`.
+
+Backend:
+
+- Host on Render.
+- Use `backend` as the root directory.
+- Build command: `pip install -r requirements.txt`
+- Start command: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
+
+Backend environment variables:
+
+```env
+DATABASE_URL=your_neon_connection_string
+JWT_SECRET=your_long_random_secret
+DEMO_EMAIL=demo@student.local
+DEMO_PASSWORD=Password123!
+FRONTEND_ORIGIN=https://your-vercel-url.vercel.app
+```
+
+Frontend:
+
+- Host on Vercel.
+- Use `frontend` as the root directory.
+- Build command: `npm run build`
+- Output directory: `dist`
+
+Frontend environment variable:
+
+```env
+VITE_API_URL=https://your-render-url.onrender.com
+```
+
+## Submission Checklist
+
+- Replace the public URL placeholders above.
+- Confirm the demo account can log in.
+- Confirm the dashboard shows `GET /api/atlas/status verified`.
+- Confirm unauthenticated `GET /api/atlas/status` returns `401 Unauthorized`.
+- Do not commit real `.env` files or real secrets.
