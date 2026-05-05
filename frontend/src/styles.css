@@ -991,11 +991,22 @@ input:focus {
   }
 
   .atlas-chat-page {
-    padding: 4.4rem 0.75rem 4rem;
+    padding: 7.2rem 0.75rem 4rem;
   }
 
   .chat-card {
     min-height: 0;
+  }
+
+  .chat-card h1 {
+    position: fixed;
+    top: 0.7rem;
+    left: 50%;
+    z-index: 4;
+    margin: 0;
+    transform: translateX(-50%) scale(0.74);
+    transform-origin: top center;
+    pointer-events: none;
   }
 
   .chat-stage {
@@ -1005,7 +1016,7 @@ input:focus {
 
   .chat-thread {
     width: 100%;
-    padding: 2.8rem 0 3rem;
+    padding: 1.8rem 0 3rem;
   }
 
   .chat-message {
@@ -1017,13 +1028,13 @@ input:focus {
   }
 
   .chat-card .chat-pills {
-    top: 0.9rem;
+    top: 4.7rem;
     right: 0.9rem;
-    width: min(360px, calc(100vw - 1.8rem));
+    width: min(260px, calc(100vw - 7.8rem));
   }
 
   .chat-card .logout-button {
-    top: 0.9rem;
+    top: 4.88rem;
     left: 0.9rem;
   }
 
